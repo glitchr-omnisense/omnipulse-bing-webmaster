@@ -36,6 +36,15 @@ position. Positions are passed as Bing gives them (not verified against a live a
 **Terms**: Bing Webmaster Tools' terms; no quota figure in what was read - keep calls few and
 cache the answers. Reuse: no maintained PHP client was found.
 
+## Usage policy
+
+Bing Webmaster Tools's usage policy is declared as data in [`policy.json`](policy.json) (omnisense/contracts'
+schema, named in `composer.json`'s `extra.omnisense.policy`), its terms read on
+2026-11-10 (https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi): no rate limit declared: Microsoft publishes no quota for the statistics calls (`rateLimits: null`, unknown); rights unknown; an API key. omnipulse's registry enforces it - a call over a
+limit is never made, a 429 and its `Retry-After` hold every next call
+(`UsageLimitReachedException`) - and a site may tighten it, never loosen it
+(omnisense/omnipulse's docs/policies.md).
+
 ## Verified, and not
 
 - Verified (the core's harness, PHP 8.4): queries summed over a period, week by week, the whole

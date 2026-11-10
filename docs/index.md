@@ -177,3 +177,12 @@ positions are passed as Bing gives them.
 
 An independent, unofficial client, affiliated with Microsoft in no way. Whoever runs it complies
 with Bing Webmaster Tools' terms (<https://www.bing.com/webmasters/>): see the README.
+
+## Usage policy
+
+Bing Webmaster Tools's usage policy is declared as data in [`policy.json`](policy.json) (omnisense/contracts'
+schema, named in `composer.json`'s `extra.omnisense.policy`), its terms read on
+2026-11-10 (https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi): no rate limit declared: Microsoft publishes no quota for the statistics calls (`rateLimits: null`, unknown); rights unknown; an API key. omnipulse's registry enforces it - a call over a
+limit is never made, a 429 and its `Retry-After` hold every next call
+(`UsageLimitReachedException`) - and a site may tighten it, never loosen it
+(omnisense/omnipulse's docs/policies.md).

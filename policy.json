@@ -1,0 +1,37 @@
+{
+    "$schema": "https://github.com/glitchr-omnisense/contracts/blob/1.x/resources/usage-policy.schema.json",
+    "provider": "bing-webmaster",
+    "rateLimits": null,
+    "rights": {
+        "commercial": "unknown",
+        "openSourceRequired": null,
+        "caching": {
+            "permission": "unknown",
+            "maxTtl": null
+        },
+        "storage": "unknown",
+        "redistribution": "unknown",
+        "attribution": {
+            "required": false,
+            "text": null,
+            "url": null,
+            "where": []
+        },
+        "licence": null
+    },
+    "requirements": {
+        "key": true,
+        "userAgent": {
+            "required": false,
+            "pattern": null
+        }
+    },
+    "provenance": {
+        "terms": "https://www.bing.com/webmasters/",
+        "policy": "https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi",
+        "verifiedAt": "2026-11-10",
+        "declaredBy": "maintainer",
+        "contact": null,
+        "notes": "Microsoft publishes no quota for the Webmaster API's statistics calls (GetQueryStats, GetPageStats, GetRankAndTrafficStats): searched on 2026-11-10, only the URL and content submission quotas are documented (per site, by GetUrlSubmissionQuota), and Bing throttles past an unpublished threshold: rate limits unknown. The data is the site owner's own statistics; the terms read say nothing of commercial use, caching, storage or redistribution. An API key from Bing Webmaster Tools' settings."
+    }
+}

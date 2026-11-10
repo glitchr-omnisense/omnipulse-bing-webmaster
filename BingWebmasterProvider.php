@@ -12,6 +12,9 @@ use Omnipulse\Model\Report;
 use Omnipulse\Model\Row;
 use Omnipulse\SearchPerformanceInterface;
 use Omnipulse\Support\Data;
+use Omnisense\Contracts\Policy\Backoff;
+use Omnisense\Contracts\Policy\DeclaresUsagePolicyInterface;
+use Omnisense\Contracts\Policy\UsagePolicy;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -21,8 +24,13 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  * week, about six months back); the rows in the query's days are kept,
  * summed over the period unless the date is asked for.
  */
-final class BingWebmasterProvider implements SearchPerformanceInterface
+final class BingWebmasterProvider implements SearchPerformanceInterface, DeclaresUsagePolicyInterface
 {
+    /** Bing Webmaster Tools's usage policy, as its terms read on the day it says (provenance.verifiedAt). */
+    public const POLICY = __DIR__.'/policy.json';
+
+    private static ?UsagePolicy $policy = null;
+
     private readonly JsonApi $api;
 
     public function __construct(
@@ -30,8 +38,9 @@ final class BingWebmasterProvider implements SearchPerformanceInterface
         #[\SensitiveParameter] private readonly string $apiKey,
         private readonly string $site,
         private readonly string $url = 'https://ssl.bing.com/webmaster/api.svc/json',
+        ?Backoff $backoff = null,
     ) {
-        $this->api = new JsonApi($http, 'Bing Webmaster');
+        $this->api = new JsonApi($http, 'Bing Webmaster', $backoff);
     }
 
     public function getName(): string
@@ -44,6 +53,11 @@ final class BingWebmasterProvider implements SearchPerformanceInterface
         return 'Bing Webmaster Tools';
     }
 
+    public function usagePolicy(): UsagePolicy
+    {
+        return self::$policy ??= UsagePolicy::fromFile(self::POLICY);
+    }
+
     public function capabilities(): Capabilities
     {
         return new Capabilities(
@@ -53,6 +67,7 @@ final class BingWebmasterProvider implements SearchPerformanceInterface
             combined: false,
             terms: ['https://learn.microsoft.com/en-us/dotnet/api/microsoft.bing.webmaster.api.interfaces.iwebmasterapi', 'https://www.bing.com/webmasters/'],
             limits: ['the data is updated weekly (the API\'s own remark): one row per period Bing chose, about six months back', 'no quota figure in what was read: keep calls few, cache the answers'],
+            policy: $this->usagePolicy(),
         );
     }
 

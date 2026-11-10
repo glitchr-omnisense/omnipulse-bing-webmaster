@@ -38,6 +38,7 @@ final class BingWebmasterFactory extends ProviderFactory
             (string) $c->string('api_key'),
             (string) $c->string('site'),
             rtrim($c->string('url') ?? 'https://ssl.bing.com/webmaster/api.svc/json', '/'),
+            $c->backoff(),
         );
     }
 }
