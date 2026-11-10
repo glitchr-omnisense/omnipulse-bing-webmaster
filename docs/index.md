@@ -1,6 +1,6 @@
-# omnireach/bing-webmaster
+# omnipulse/bing-webmaster
 
-Bing Webmaster Tools for [omnisense/omnireach](https://github.com/glitchr-omnisense/omnireach): a
+Bing Webmaster Tools for [omnisense/omnipulse](https://github.com/glitchr-omnisense/omnipulse): a
 site's search queries and pages in Bing with their clicks, impressions, CTR and average position,
 period by period or summed over the query's days. The provider calls the Bing Webmaster API's
 JSON endpoint (its reference:
@@ -18,10 +18,10 @@ maintained PHP client of this API was found to reuse.
 ## Installation
 
 ```sh
-composer require omnireach/bing-webmaster symfony/http-client
+composer require omnipulse/bing-webmaster symfony/http-client
 ```
 
-Requires PHP 8.2, `omnisense/omnireach` (1.x) and `symfony/http-client-contracts` (3).
+Requires PHP 8.2, `omnisense/omnipulse` (1.x) and `symfony/http-client-contracts` (3).
 
 ## Credentials
 
@@ -105,11 +105,11 @@ answers.
 
 require __DIR__.'/vendor/autoload.php';
 
-use Omnireach\BingWebmaster\BingWebmasterFactory;
-use Omnireach\Model\Dimension;
-use Omnireach\Model\Metric;
-use Omnireach\Model\ReachQuery;
-use Omnireach\Registry;
+use Omnipulse\BingWebmaster\BingWebmasterFactory;
+use Omnipulse\Model\Dimension;
+use Omnipulse\Model\Metric;
+use Omnipulse\Model\ReachQuery;
+use Omnipulse\Registry;
 use Symfony\Component\HttpClient\HttpClient;
 
 $registry = new Registry([new BingWebmasterFactory(HttpClient::create())], [
@@ -134,11 +134,11 @@ In Symfony:
 
 ```yaml
 services:
-    Omnireach\BingWebmaster\BingWebmasterFactory:
+    Omnipulse\BingWebmaster\BingWebmasterFactory:
         arguments: ['@http_client']
-    Omnireach\Registry:
+    Omnipulse\Registry:
         arguments:
-            $factories: ['@Omnireach\BingWebmaster\BingWebmasterFactory']
+            $factories: ['@Omnipulse\BingWebmaster\BingWebmasterFactory']
             $config:
                 bing: { factory: bing-webmaster, options: { api_key: '%env(BING_WEBMASTER_KEY)%', site: 'https://example.org/' } }
 ```

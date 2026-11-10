@@ -1,17 +1,17 @@
 <?php
 
-namespace Omnireach\BingWebmaster\Tests;
+namespace Omnipulse\BingWebmaster\Tests;
 
-use Omnireach\BingWebmaster\BingWebmasterFactory;
-use Omnireach\BingWebmaster\BingWebmasterProvider;
-use Omnireach\Exception\NotSupportedException;
-use Omnireach\Exception\ProviderException;
-use Omnireach\Model\Dimension;
-use Omnireach\Model\Metric;
-use Omnireach\Model\ReachQuery;
-use Omnireach\Model\Row;
-use Omnireach\Registry;
-use Omnireach\Testing\RecordedHttpClient;
+use Omnipulse\BingWebmaster\BingWebmasterFactory;
+use Omnipulse\BingWebmaster\BingWebmasterProvider;
+use Omnipulse\Exception\NotSupportedException;
+use Omnipulse\Exception\ProviderException;
+use Omnipulse\Model\Dimension;
+use Omnipulse\Model\Metric;
+use Omnipulse\Model\ReachQuery;
+use Omnipulse\Model\Row;
+use Omnipulse\Registry;
+use Omnipulse\Testing\RecordedHttpClient;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -88,13 +88,17 @@ final class BingWebmasterProviderTest extends TestCase
         try {
             (new BingWebmasterProvider($http, 'example-key-not-real', 'https://atelier.example.org/'))->searchPerformance(self::period([Dimension::Query]));
             self::fail('no exception');
-        } catch (\Omnireach\Exception\UnreachableException $e) {
+        } catch (\Omnipulse\Exception\UnreachableException $e) {
             self::assertStringNotContainsString('example-key-not-real', $e->getMessage());
             self::assertStringNotContainsString('apikey', $e->getMessage());
             self::assertStringContainsString('GET /webmaster/api.svc/json/GetQueryStats', $e->getMessage());
         }
     }
 
+    /**
+     * @param list<Dimension>                $dimensions
+     * @param list<\Omnipulse\Model\Metric> $metrics
+     */
     private static function period(array $dimensions, array $metrics = []): ReachQuery
     {
         return new ReachQuery(new \DateTimeImmutable('2026-09-21'), new \DateTimeImmutable('2026-10-11'), $dimensions, $metrics);

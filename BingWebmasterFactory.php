@@ -1,11 +1,11 @@
 <?php
 
-namespace Omnireach\BingWebmaster;
+namespace Omnipulse\BingWebmaster;
 
-use Omnireach\Config;
-use Omnireach\Exception\InvalidConfigException;
-use Omnireach\ProviderFactory;
-use Omnireach\ProviderInterface;
+use Omnipulse\Config;
+use Omnipulse\Exception\InvalidConfigException;
+use Omnipulse\ProviderFactory;
+use Omnipulse\ProviderInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -24,9 +24,9 @@ final class BingWebmasterFactory extends ProviderFactory
     protected function populate(Config $c): void
     {
         $c->defaults([
-            'omnireach.factory_name' => 'bing-webmaster',
-            'omnireach.factory_title' => 'Bing Webmaster Tools',
-            'omnireach.required_options' => ['api_key', 'site'],
+            'omnipulse.factory_name' => 'bing-webmaster',
+            'omnipulse.factory_title' => 'Bing Webmaster Tools',
+            'omnipulse.required_options' => ['api_key', 'site'],
             'url' => 'https://ssl.bing.com/webmaster/api.svc/json',
         ]);
     }

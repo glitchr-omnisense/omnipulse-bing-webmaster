@@ -1,7 +1,7 @@
 {
-    "name": "omnireach/bing-webmaster",
+    "name": "omnipulse/bing-webmaster",
     "type": "library",
-    "description": "Omnireach's Bing Webmaster Tools, under any PHP host: a site's search queries and pages in Bing with their clicks, impressions, CTR and average position, week by week or over a period, through the Bing Webmaster API (JSON, API key).",
+    "description": "Omnipulse's Bing Webmaster Tools, under any PHP host: a site's search queries and pages in Bing with their clicks, impressions, CTR and average position, week by week or over a period, through the Bing Webmaster API (JSON, API key).",
     "keywords": [
         "bing",
         "bing-webmaster",
@@ -10,9 +10,9 @@
         "queries",
         "positions",
         "framework-agnostic",
-        "omnireach"
+        "omnipulse"
     ],
-    "homepage": "https://github.com/glitchr-omnisense/omnireach-bing-webmaster",
+    "homepage": "https://github.com/glitchr-omnisense/omnipulse-bing-webmaster",
     "license": "MIT",
     "authors": [
         {
@@ -22,16 +22,19 @@
     ],
     "require": {
         "php": ">=8.2",
-        "omnisense/omnireach": "^1.0@dev",
+        "omnisense/omnipulse": "^1.0@dev",
         "symfony/http-client-contracts": "^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.0",
         "symfony/http-client": "^6.4|^7.0|^8.0"
     },
+    "replace": {
+        "omnireach/bing-webmaster": "self.version"
+    },
     "autoload": {
         "psr-4": {
-            "Omnireach\\BingWebmaster\\": ""
+            "Omnipulse\\BingWebmaster\\": ""
         },
         "exclude-from-classmap": [
             "/Tests/"
@@ -39,7 +42,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Omnireach\\BingWebmaster\\Tests\\": "Tests/"
+            "Omnipulse\\BingWebmaster\\Tests\\": "Tests/"
         }
     },
     "extra": {

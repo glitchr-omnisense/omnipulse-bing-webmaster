@@ -1,12 +1,15 @@
-# omnireach/bing-webmaster
+# omnipulse/bing-webmaster
 
-[omnisense/omnireach](https://github.com/glitchr-omnisense/omnireach)'s Bing Webmaster Tools, under
+Formerly `omnireach/bing-webmaster` (renamed on 2026-11-10 with its family: `Omnireach\` is now `Omnipulse\`;
+this package replaces the former name).
+
+[omnisense/omnipulse](https://github.com/glitchr-omnisense/omnipulse)'s Bing Webmaster Tools, under
 any PHP host: a site's search queries and pages in Bing with their clicks, impressions, CTR and
 average position, period by period or summed over the query's days.
 
 ```php
-use Omnireach\BingWebmaster\BingWebmasterFactory;
-use Omnireach\Registry;
+use Omnipulse\BingWebmaster\BingWebmasterFactory;
+use Omnipulse\Registry;
 use Symfony\Component\HttpClient\HttpClient;
 
 $registry = new Registry([new BingWebmasterFactory(HttpClient::create())], [

@@ -1,17 +1,17 @@
 <?php
 
-namespace Omnireach\BingWebmaster;
+namespace Omnipulse\BingWebmaster;
 
-use Omnireach\Capabilities;
-use Omnireach\Exception\NotSupportedException;
-use Omnireach\Http\JsonApi;
-use Omnireach\Model\Dimension;
-use Omnireach\Model\Metric;
-use Omnireach\Model\ReachQuery;
-use Omnireach\Model\Report;
-use Omnireach\Model\Row;
-use Omnireach\SearchPerformanceInterface;
-use Omnireach\Support\Data;
+use Omnipulse\Capabilities;
+use Omnipulse\Exception\NotSupportedException;
+use Omnipulse\Http\JsonApi;
+use Omnipulse\Model\Dimension;
+use Omnipulse\Model\Metric;
+use Omnipulse\Model\ReachQuery;
+use Omnipulse\Model\Report;
+use Omnipulse\Model\Row;
+use Omnipulse\SearchPerformanceInterface;
+use Omnipulse\Support\Data;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
