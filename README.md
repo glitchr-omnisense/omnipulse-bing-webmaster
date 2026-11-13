@@ -7,6 +7,39 @@ this package replaces the former name).
 any PHP host: a site's search queries and pages in Bing with their clicks, impressions, CTR and
 average position, period by period or summed over the query's days.
 
+## Install and a first call
+
+```sh
+composer require omnipulse/bing-webmaster
+```
+
+No account for this first call: Bing Webmaster's answer is recorded
+(`Omnipulse\Testing\RecordedHttpClient` answers in place of the API), so nothing leaves the process.
+A real call needs a Bing Webmaster Tools account where the site is verified, and its API key.
+
+```php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Omnipulse\BingWebmaster\BingWebmasterFactory;
+use Omnipulse\Model\{Dimension, ReachQuery};
+use Omnipulse\Testing\RecordedHttpClient;
+
+// Bing Webmaster's answer, recorded: nothing sent. HttpClient::create() (symfony/http-client) for a real call.
+$http = RecordedHttpClient::routes([
+    'GET /GetQueryStats' => '{"d": [{"Query": "atelier poterie strasbourg", "Date": "/Date(1790578800000-0700)/", "Clicks": 10, "Impressions": 200, "AvgClickPosition": 4, "AvgImpressionPosition": 5}]}',
+]);
+$bing = (new BingWebmasterFactory($http))->create(['api_key' => 'recorded', 'site' => 'https://atelier.example.org/']);
+
+$report = $bing->searchPerformance(new ReachQuery(new DateTimeImmutable('2026-09-01'), new DateTimeImmutable('2026-10-31'), [Dimension::Query]));
+foreach ($report->rows as $row) {
+    echo json_encode($row->dimensions + $row->metrics, JSON_UNESCAPED_SLASHES), "\n";   // {"query":"atelier poterie strasbourg","clicks":10,"impressions":200,...}
+}
+```
+
+With your credentials, through the family's registry:
+
 ```php
 use Omnipulse\BingWebmaster\BingWebmasterFactory;
 use Omnipulse\Registry;
